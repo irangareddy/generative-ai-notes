@@ -8,14 +8,10 @@
 * Originated from **Latent Diffusion (Rombach et al., CVPR 2022)** — developed at LMU Munich and Heidelberg University.
 * Stable Diffusion = *LDM optimized for open-source, high-fidelity, efficient text-to-image generation*.
 
-
-
 ### **2. Key Idea**
 
 * Instead of running diffusion directly in **pixel space**, LDMs perform diffusion in a **latent space** — a compressed representation of images.
 * This dramatically reduces computational cost while maintaining high perceptual quality.
-
-
 
 ## **II. Latent Diffusion Model (LDM) Architecture**
 
@@ -40,20 +36,16 @@
 * Higher fidelity
 * Model focuses on meaning, not raw pixel textures
 
-
-
 ### **2. Architecture Summary**
 
 | Component              | Role                        | Typical Settings     |
-| - |  | -- |
+| --- | --- | --- |
 | Encoder                | Compress input image        | CNN + attention      |
 | Decoder                | Reconstruct image           | CNN + attention      |
 | Diffusion Model        | Denoise latent              | U-Net or Transformer |
 | Compression Factor (D) | Spatial downsampling        | 8×                   |
 | Channels (C)           | Latent depth                | 16                   |
 | Example                | 256×256×3 → 32×32×16 latent |                      |
-
-
 
 ### **3. Training Procedure**
 
@@ -70,8 +62,6 @@
 
 *Modern LDM pipeline = VAE + GAN + Diffusion.*
 
-
-
 ## **III. VAE, VQ-VAE, and VQ-GAN Foundations**
 
 | Model                            | Year | Key Idea                                            |
@@ -82,8 +72,6 @@
 | **Used in LDMs**                 | —    | Combines compression + realism for latent diffusion |
 
 **LDM encoder–decoder = VAE trained with GAN-style discriminator.**
-
-
 
 ## **IV. Conditioning and Cross-Attention**
 
@@ -100,8 +88,6 @@ LDMs can condition generation on multiple inputs:
 * Injects conditioning into denoising process.
 * Each Transformer block aligns image tokens with text embeddings.
 * Enables fine-grained control of spatial and semantic correspondence.
-
-
 
 ## **V. Text-to-Image Generation**
 
@@ -120,8 +106,6 @@ LDMs can condition generation on multiple inputs:
 * Controls prompt adherence (typical scale = **7.5**).
 * Balances text alignment and image diversity.
 
-
-
 ### **2. Example Configuration**
 
 * Text Encoder: **T5 + CLIP**
@@ -130,18 +114,14 @@ LDMs can condition generation on multiple inputs:
 * Patchified: **2×2 → 64×64 = 1024 tokens**
   (*Example: FLUX.1 [dev]*)
 
-
-
 ### **3. Comparison to DALL·E 2**
 
 | Feature      | DALL·E 2                | Stable Diffusion         |
-|  | -- |  |
+| --- | --- | --- |
 | Architecture | Pixel-space diffusion   | Latent diffusion         |
 | Text Encoder | CLIP                    | CLIP / T5                |
 | Cost         | High                    | Efficient                |
 | Output       | Coherent but less sharp | Realistic & customizable |
-
-
 
 ## **VI. Diffusion Transformer (DiT)**
 
@@ -155,8 +135,6 @@ LDMs can condition generation on multiple inputs:
 * **Timestep conditioning:** via scale/shift prediction.
 * **Cross-/Joint Attention:** for text or image conditioning.
 * DiT architecture scales better for very large models (e.g., video or multimodal diffusion).
-
-
 
 ## **VII. Text-to-Video Diffusion Models**
 
@@ -180,12 +158,10 @@ LDMs can condition generation on multiple inputs:
 
 **Applications:** Story videos, generative animation, cinematic rendering.
 
-
-
 ### **3. Video Model Ecosystem (2024–2025)**
 
 | Model                                           | Developer | Params | Release  |
-| -- |  |  | -- |
+| --- | --- | --- | --- |
 | **Sora**                                        | OpenAI    | —      | 2024 Feb |
 | **MovieGen**                                    | Meta      | 14B    | 2024 Oct |
 | **HunyuanVideo**                                | Tencent   | 30B    | 2024 Dec |
@@ -193,8 +169,6 @@ LDMs can condition generation on multiple inputs:
 | **Wan**                                         | Alibaba   | 30B    | 2025 Mar |
 | **Veo 3**                                       | Google    | —      | 2025 Sep |
 | (*See page 34 timeline diagram for evolution.*) |           |        |          |
-
-
 
 ## **VIII. Autoregressive (AR) vs Diffusion Approaches**
 
@@ -211,8 +185,6 @@ LDMs can condition generation on multiple inputs:
 * AR: faster inference, but weaker coherence/physics (esp. for video).
 * Diffusion Transformers: state-of-the-art realism (e.g., **Sora 2**).
 
-
-
 ## **IX. Diffusion Distillation**
 
 ### **1. Problem**
@@ -227,7 +199,7 @@ LDMs can condition generation on multiple inputs:
 **Examples:**
 
 | Method                                   | Key Paper       | Year         |
-| - |  |  |
+| --- | --- | --- |
 | Progressive Distillation                 | Salimans & Ho   | ICLR 2022    |
 | Consistency Models                       | Song et al.     | ICML 2023    |
 | Adversarial Diffusion Distillation (ADD) | Sauer et al.    | ECCV 2024    |
@@ -237,12 +209,10 @@ LDMs can condition generation on multiple inputs:
 
 **Goal:** Faster, stable, high-resolution diffusion generation.
 
-
-
 ## **X. Related and Competing Models**
 
 | Model                                | Core Mechanism                           | Domain       | Developer    |
-|  | - |  |  |
+| --- | --- | --- | --- |
 | **DALL·E 2 / 3**                     | Diffusion + CLIP guidance                | Text → Image | OpenAI       |
 | **Imagen**                           | Pixel-space diffusion + super-resolution | Text → Image | Google       |
 | **Parti**                            | Autoregressive                           | Text → Image | Google       |
@@ -251,8 +221,6 @@ LDMs can condition generation on multiple inputs:
 | **Realtime Voice (OpenAI)**          | Conditional autoregressive               | Speech       | OpenAI       |
 
 (*See pages 46–50 for official links and references.*)
-
-
 
 ## **XI. Limitations & Challenges**
 
@@ -270,8 +238,6 @@ LDMs can condition generation on multiple inputs:
 * Internet-trained models inherit biases.
 * Risk of inappropriate or misleading content.
 
-
-
 ## **XII. Summary Table**
 
 | Stage               | Method                  | Model Type                | Example             |
@@ -283,8 +249,6 @@ LDMs can condition generation on multiple inputs:
 | **Video Extension** | 4D Latent Diffusion     | DiT-based                 | Sora, MovieGen      |
 | **Future Trends**   | Space-time Transformers | Unified multimodal models | Cosmos, Veo 3       |
 
-
-
 You should be able to:
 
 1. **Explain** how LDMs differ from pixel-space diffusion.
@@ -295,4 +259,3 @@ You should be able to:
 6. **Summarize** diffusion distillation methods for faster sampling.
 7. **Describe** text-to-video pipelines (MovieGen, Sora).
 8. **Discuss** challenges (bias, fidelity, attribute control).
-

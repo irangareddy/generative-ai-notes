@@ -207,6 +207,7 @@ Two networks — **Generator (G)** and **Discriminator (D)** — compete:
 | Discriminator (D) | Classifies real vs fake samples         |
 
 Objective:
+
 $$[
 \min_G \max_D \mathbb{E}*{x \sim p*{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]
 ]$$
