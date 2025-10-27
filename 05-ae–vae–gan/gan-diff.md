@@ -68,11 +68,13 @@ Generator produces **only a few modes** (types) of samples — e.g., all faces l
 ### **3.2 Solution — Wasserstein (Earth-Mover) Distance**
 
 Instead of JS-divergence, measure **how much "mass" must move** to transform real → generated distribution.
+
 $$
 [
 W(P_r, P_g) = \inf_{\gamma \in \Pi (P_r, P_g)} \mathbb{E}_{(x, y) \sim \gamma} [|x - y|]
 ]
 $$
+
 Intuition: Smooth, continuous measure of distance between distributions.
 
 ### **3.3 WGAN Objective**
